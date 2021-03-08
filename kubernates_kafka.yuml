@@ -1,0 +1,99 @@
+
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kafkadummy
+  labels:
+    app: kafkadummy
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: kafkadummy
+  template:
+    metadata:
+      labels:
+        app: kafkadummy
+    spec:
+      containers:
+      - name: kafkadummy
+        image: vvkovv/kafka_dummy:begin
+		env:
+		- name: KUBER_SERVICE
+		  value: kafkadummyservice
+        ports:
+        - name: zoo
+          containerPort: 2181
+        - name: kafka
+          containerPort: 9092
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: kafkadummyservice
+spec:
+   selector:
+    app: kafkadummy
+   ports:
+    - name: zoo
+      protocol: TCP
+      port: 2181
+      targetPort: 2181
+    - name: kafka
+      protocol: TCP
+      port: 9092
+      targetPort: 9092
+
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kafka-producer
+  labels:
+    app: kafkaproducer
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: kafka-producer
+  template:
+    metadata:
+      labels:
+        app: kafka-producer
+    spec:
+      containers:
+      - name: kafka-producer
+        image: vvkovv/kafka_producer:begin
+		env:
+		- name: KAFKA_SERVER
+		  value: kafkadummyservice
+
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kafka-consumer
+  labels:
+    app: kafka-consumer
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: kafka-consumer
+  template:
+    metadata:
+      labels:
+        app: kafka-consumer
+    spec:
+      containers:
+      - name: kafka-consumer
+        image: vvkovv/kafka_consumer:begin
+		env:
+		- name: KAFKA_SERVER
+		  value: kafkadummyservice
