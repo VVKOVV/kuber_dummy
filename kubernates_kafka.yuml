@@ -20,9 +20,9 @@ spec:
       containers:
       - name: kafkadummy
         image: vvkovv/kafka_dummy:begin
-		env:
-		- name: KUBER_SERVICE
-		  value: kafkadummyservice
+        env:
+        - name: KUBER_SERVICE
+          value: kafkadummyservice
         ports:
         - name: zoo
           containerPort: 2181
@@ -69,9 +69,9 @@ spec:
       containers:
       - name: kafka-producer
         image: vvkovv/kafka_producer:begin
-		env:
-		- name: KAFKA_SERVER
-		  value: kafkadummyservice
+        env:
+        - name: KAFKA_SERVER
+        value: kafkadummyservice
 
 ---
 
@@ -94,6 +94,6 @@ spec:
       containers:
       - name: kafka-consumer
         image: vvkovv/kafka_consumer:begin
-		env:
-		- name: KAFKA_SERVER
-		  value: kafkadummyservice
+        env:
+        - name: KAFKA_SERVER
+        value: kafkadummyservice
