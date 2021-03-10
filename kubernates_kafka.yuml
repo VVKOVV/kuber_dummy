@@ -71,7 +71,7 @@ spec:
         image: vvkovv/kafka_producer:begin
         env:
         - name: KAFKA_SERVER
-        value: kafkadummyservice
+          value: kafkadummyservice
 
 ---
 
@@ -96,4 +96,4 @@ spec:
         image: vvkovv/kafka_consumer:begin
         env:
         - name: KAFKA_SERVER
-        value: kafkadummyservice
+          value: kafkadummyservice
