@@ -24,7 +24,7 @@ spec:
         - name: KUBER_SERVICE
           value: kafkadummyservice
         - name: CUSTOM_OPTS
-          -javaagent:/opt/pjavaagent/jmx_prometheus_javaagent-0.15.0.jar=0.0.0.0:8080:/opt/pjavaagent/metrics.yml
+          value: -javaagent:/opt/pjavaagent/jmx_prometheus_javaagent-0.15.0.jar=0.0.0.0:8080:/opt/pjavaagent/metrics.yml
         ports:
         - name: zoo
           containerPort: 2181
