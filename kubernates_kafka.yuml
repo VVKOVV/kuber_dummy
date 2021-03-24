@@ -19,15 +19,22 @@ spec:
     spec:
       containers:
       - name: kafkadummy
-        image: vvkovv/kafka_dummy:begin
+        image: vvkovv/kafka_dummy:1
         env:
         - name: KUBER_SERVICE
           value: kafkadummyservice
+        - name: CUSTOM_OPTS
+          -javaagent:/opt/pjavaagent/jmx_prometheus_javaagent-0.15.0.jar=0.0.0.0:8080:/opt/pjavaagent/metrics.yml
         ports:
         - name: zoo
           containerPort: 2181
+          protocol: TCP
         - name: kafka
           containerPort: 9092
+          protocol: TCP
+        - name: jmx
+          containerPort: 8080
+          protocol: TCP
 
 ---
 
