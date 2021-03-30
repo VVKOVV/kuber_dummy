@@ -62,7 +62,7 @@ kind: Deployment
 metadata:
   name: kafka-producer
   labels:
-    app: kafkaproducer
+    app: kafka-producer
 spec:
   replicas: 1
   selector:
@@ -75,10 +75,25 @@ spec:
     spec:
       containers:
       - name: kafka-producer
-        image: vvkovv/kafka_producer:begin
+        image: vvkovv/kafka_producer:1
         env:
         - name: KAFKA_SERVER
           value: kafkadummyservice
+          
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: kafka-producer-service
+spec:
+   selector:
+    app: kafka-producer
+   ports:
+    - name: metrics
+      protocol: TCP
+      port: 5000
+      targetPort: 5000
 
 ---
 
