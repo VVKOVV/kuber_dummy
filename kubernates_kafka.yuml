@@ -115,7 +115,22 @@ spec:
     spec:
       containers:
       - name: kafka-consumer
-        image: vvkovv/kafka_consumer:begin
+        image: vvkovv/kafka_consumer:1
         env:
         - name: KAFKA_SERVER
           value: kafkadummyservice
+          
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: kafka-consumer-service
+spec:
+   selector:
+    app: kafka-consumer
+   ports:
+    - name: metrics
+      protocol: TCP
+      port: 5000
+      targetPort: 5000
