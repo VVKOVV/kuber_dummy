@@ -54,6 +54,10 @@ spec:
       protocol: TCP
       port: 9092
       targetPort: 9092
+    - name: jmx
+      protocol: TCP
+      port: 8080
+      targetPort: 8080
 
 ---
 
